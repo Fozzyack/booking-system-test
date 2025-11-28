@@ -22,9 +22,9 @@ export const Header: React.FC = () => {
 
     return (
         <header
-            className={`sticky right-0 bg-white z-50 transition-all duration-300 ${
+            className={`sticky right-0 top-0 bg-white z-50 transition-all duration-300 ${
                 isScrolled || isMobileMenuOpen
-                    ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-bloom-gray"
+                    ? "bg-white/80 backdrop-blur-md shadow-sm"
                     : "bg-transparent"
             }`}
         >
