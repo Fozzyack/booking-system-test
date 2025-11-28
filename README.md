@@ -2,7 +2,9 @@
 
 A modern, full-stack booking system for coworking spaces, built with Next.js and Django.
 
-> **Note**: This is a test project to explore and experiment with various features. It is not a full-fledged production application.
+## Just for Testing
+
+This is a test project to explore and experiment with various features. It is not a full-fledged production application.
 
 ## Overview
 
@@ -112,22 +114,8 @@ The frontend application will be available at `http://localhost:3000`
 - Browse available coworking spaces
 - Book desks, meeting rooms, and private offices
 - Manage bookings and reservations
-- User authentication and profiles
+- Admin User authentication and profiles
 - Real-time availability updates
 - Responsive design for mobile and desktop
 
-## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is private and proprietary.
-
-## Contact
-
-Frasier - fsundra@gmail.com
