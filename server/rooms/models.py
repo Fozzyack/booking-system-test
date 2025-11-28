@@ -3,7 +3,7 @@ from django.db import models
 class Rooms(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="rooms-images", blank=True, null=True)
+    image = models.ImageField(upload_to="", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
