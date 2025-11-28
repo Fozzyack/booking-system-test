@@ -24,12 +24,12 @@ const FilterSection: React.FC<FilterProps> = ({ filters, setFilters }) => {
         });
     };
     return (
-        <div className="mt-4">
-            <div className="">
-                <Filter className="inline-block" />
-                <p className="inline-block p-4">Filter By:</p>
+        <div className="flex items-center gap-4 py-4 flex-wrap">
+            <div className="flex items-center justify-center">
+                <Filter className="" />
+                <p className="">Filter By:</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
                 {FILTER_LIST.map((filter, index) => {
                     const isSelected = filters.includes(filter);
                     return (

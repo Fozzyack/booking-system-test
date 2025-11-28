@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
-                    <div className="flex-shrink-0 flex items-center gap-2">
+                    <div className="shrink-0 flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-bloom-orbit flex items-center justify-center text-white">
                             <Sparkles size={18} fill="currentColor" />
                         </div>
@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
                         </span>
                     </div>
 
-                    <nav className="hidden md:flex gap-8 items-center items-end">
+                    <nav className="hidden md:flex gap-8 items-end">
                         {navItems.map((item) => (
                             <a
                                 key={item.label}
@@ -56,13 +56,13 @@ export const Header: React.FC = () => {
                     <div className="hidden md:flex gap-4 text-sm">
                         <a
                             href="#"
-                            className=" rounded-xl px-3 py-1 border border-primary bg-bloom-blue hover:bg-bloom-blue-light transition-all duration-300 ease-in-out"
+                            className=" rounded-xl px-3 py-2 border border-primary bg-bloom-blue hover:bg-bloom-blue-light transition-all duration-300 ease-in-out"
                         >
                             Find Booking
                         </a>
                         <a
                             href="#"
-                            className=" rounded-xl px-3 py-1 border border-primary bg-slate-200 hover:bg-bloom-yellow transition-all duration-300 ease-in-out"
+                            className=" rounded-xl px-3 py-2 border border-primary bg-slate-200 hover:bg-bloom-yellow transition-all duration-300 ease-in-out"
                         >
                             Login
                         </a>

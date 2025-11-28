@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
+import SpacesAvailable from "@/components/SpacesAvailable";
 
 export default function Home() {
     const [search, setSearch] = useState("");
@@ -25,6 +26,7 @@ export default function Home() {
                     </p>
                     <SearchBar search={search} setSearch={setSearch} />
                     <FilterSection filters={filters} setFilters={setFilters} />
+                    <SpacesAvailable filters={filters}/>
                 </div>
             </div>
         </div>
