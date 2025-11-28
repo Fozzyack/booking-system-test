@@ -27,11 +27,11 @@ const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle
                                 handleFilterSelect(e, filter);
                             }}
                             key={index}
-                            className={`flex items-center justify-center border border-bloom-gray p-2 rounded-xl hover:-translate-y-1/12 duration-150 transition-all ease-in-out
-                                ${isSelected ? "bg-black text-white" : "bg-slate-200 text-primary"}
+                            className={`flex text-xs md:test:sm items-center justify-center border border-bloom-gray p-2 rounded-xl hover:-translate-y-1/12 duration-150 transition-all ease-in-out
+                                ${isSelected ? "bg-primary text-primary-foreground" : "bg-slate-200 text-primary"}
                                 `}
                         >
-                            {isSelected && <Check />}
+                            {isSelected && <Check width={15} height={15}/>}
                             {filter}
                         </button>
                     );

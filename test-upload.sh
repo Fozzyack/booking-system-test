@@ -6,19 +6,19 @@ echo "Creating rooms with test images..."
 
 # Room 1 with cw1.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Conference Room A" \
+  name="IMac Central" \
   description="Large conference room with projector" \
   image@./testimages/cw1.jpg
 
 # Room 2 with cw2.jpg  
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Meeting Room B" \
+  name="Under Rottnest" \
   description="Small meeting room for 6 people" \
   image@./testimages/cw2.jpg
 
 # Room 3 with cw3.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Board Room C" \
+  name="The Cove" \
   description="Executive board room with video conferencing" \
   image@./testimages/cw3.jpg
 
@@ -30,13 +30,13 @@ http --ignore-stdin -f POST :8000/rooms/ \
 
 # Room 5 with cw5.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Lecture Hall E" \
+  name="Standard Hall E" \
   description="Large lecture hall with stadium seating" \
   image@./testimages/cw5.jpg
 
 # Room 6 with cw6.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Collaboration Space F" \
+  name="The Milky Way" \
   description="Open collaboration area with flexible seating" \
   image@./testimages/cw6.jpg
 
@@ -48,13 +48,13 @@ http --ignore-stdin -f POST :8000/rooms/ \
 
 # Room 8 with cw8.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Creative Studio H" \
+  name="Warm Studio H" \
   description="Creative studio with natural light and art supplies" \
   image@./testimages/cw8.jpg
 
 # Room 9 with cw9.jpg
 http --ignore-stdin -f POST :8000/rooms/ \
-  name="Focus Room I" \
+  name="Large Dog Park I" \
   description="Quiet focus room for individual work" \
   image@./testimages/cw9.jpg
 

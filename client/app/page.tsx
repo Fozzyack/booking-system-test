@@ -47,7 +47,7 @@ export default function Home() {
                     </h1>
                     <p className="text-sm">
                         Access premium workspaces, studios and event halls
-                        accross or areas. Instant booking, no contracts.
+                        across our areas. Instant booking, no contracts.
                     </p>
                     <SearchBar value={search} onChange={setSearch} />
                     <FilterSection selectedTags={filters} onTagToggle={handleTagToggle} />
