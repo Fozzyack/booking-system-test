@@ -24,7 +24,7 @@ const SpacesAvailable: React.FC<SpacesAvailableProps> = ({ selectedTags, rooms, 
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredRooms.map(room => (
-                    <div key={room.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div key={room.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-0.5 hover:scale-105 transition-all ease-in-out flex flex-col">
                         {room.image && (
                             <img 
                                 src={room.image} 
@@ -32,10 +32,10 @@ const SpacesAvailable: React.FC<SpacesAvailableProps> = ({ selectedTags, rooms, 
                                 className="w-full h-48 object-cover"
                             />
                         )}
-                        <div className="p-4">
+                        <div className="p-4 flex flex-col grow">
                             <h4 className="text-lg font-semibold text-primary">{room.name}</h4>
                             <p className="text-sm text-gray-600 mt-1">{room.description}</p>
-                            <div className="flex flex-wrap gap-2 mt-3">
+                            <div className="flex flex-wrap gap-2 my-3">
                                 {room.tags.slice(0, 3).map(tag => (
                                     <span 
                                         key={tag.id}
@@ -50,6 +50,9 @@ const SpacesAvailable: React.FC<SpacesAvailableProps> = ({ selectedTags, rooms, 
                                     </span>
                                 )}
                             </div>
+                            <button className="bg-primary text-primary-foreground py-2 flex item-center justify-center rounded-xl mt-auto w-full hover:bg-primary/90 transition-colors">
+                                Book Now
+                            </button>
                         </div>
                     </div>
                 ))}
