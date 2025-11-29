@@ -1,14 +1,11 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from .models import Bookings
 from .serializers import BookingSerializer
 
 # Create your views here.
 
-class BookingList(generics.ListCreateAPIView):
-    queryset = Bookings
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Bookings.objects.all()
     serializer_class = BookingSerializer
 
-class BookingDetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Bookings
-    serializer_class = BookingSerializer

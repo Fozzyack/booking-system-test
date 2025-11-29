@@ -1,10 +1,13 @@
-from django.urls import path 
+from rest_framework.routers import DefaultRouter
+from django.urls import base, include, path 
 from . import views
 
+
+router = DefaultRouter()
+router.register(r"rooms", viewset=views.RoomViewSet, basename="room")
+router.register(r"tags", viewset=views.TagViewSet, basename="tag")
+
 urlpatterns = [
-        path("rooms/", views.RoomList.as_view()),
-        path("rooms/<int:pk>/", views.RoomDetails.as_view()),
-        path("tags/", views.TagList.as_view()),
-        path("tags/<int:pk>/", views.TagDetails.as_view()),
+        path("", include(router.urls)),
 ];
 

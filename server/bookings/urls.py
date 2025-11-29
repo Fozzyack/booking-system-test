@@ -3,6 +3,5 @@ from . import views
 
 
 urlpatterns = [
-        path("bookings/", views.BookingList.as_view()),
-        path("bookings/<int:pk>", views.BookingDetails.as_view()),
+        path("bookings/", views.BookingViewSet.as_view({"get": "list", "post": "create"})),
 ]
