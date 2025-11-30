@@ -1,121 +1,222 @@
 # Coworking Space Booking System
 
-A modern, full-stack booking system for coworking spaces, built with Next.js and Django.
+A modern, full-stack booking system for coworking spaces, built with Next.js and Django REST Framework.
 
-## Just for Testing
-
-This is a test project to explore and experiment with various features. It is not a full-fledged production application.
+> **Note**: This is a test project created to explore and experiment with various technologies. It is not a production-ready application.
 
 ## Overview
 
-This application allows users to browse, book, and manage coworking space reservations. It features a responsive frontend built with React and Next.js, backed by a robust Django REST API.
+This application provides a streamlined interface for browsing and booking coworking spaces. Users can search and filter through available rooms, view detailed information with tags (like High-Speed WiFi, Meeting Rooms, Quiet Zones), and make reservations. The system features a responsive React/Next.js frontend communicating with a Django REST API backend.
 
 ## Tech Stack
 
-### Frontend (Client)
-- **Framework**: Next.js 16.0.5
-- **UI Library**: React 19.2.0
-- **Styling**: Tailwind CSS 4
-- **Icons**: Lucide React
-- **Language**: TypeScript 5
+### Frontend (`/client`)
+- **Next.js** 16.0.5 with App Router
+- **React** 19.2.0
+- **TypeScript** 5
+- **Tailwind CSS** 4
+- **Lucide React** - Icon library
+- **Bun** - JavaScript runtime & package manager
 
-### Backend (Server)
-- **Framework**: Django 5.2.8
-- **API**: Django REST Framework 3.16.1
-- **Language**: Python 3.14+
-- **Package Manager**: Poetry
+### Backend (`/server`)
+- **Django** 5.2.8
+- **Django REST Framework** 3.16.1
+- **Python** 3.13+
+- **SQLite** - Database (default)
+- **Pillow** - Image processing
+- **django-cors-headers** - CORS support
+- **Poetry** - Dependency management
 
 ## Project Structure
 
 ```
 bloom-test/
-├── client/              # Next.js frontend application
-│   ├── app/            # Next.js app directory
-│   ├── components/     # React components
-│   └── public/         # Static assets
-├── server/             # Django backend application
-└── README.md          # This file
+├── client/                    # Next.js frontend
+│   ├── app/                   # App router pages
+│   │   ├── page.tsx          # Main landing/search page
+│   │   ├── layout.tsx        # Root layout
+│   │   └── globals.css       # Global styles
+│   ├── components/            # React components
+│   │   ├── BookingModal.tsx  # Booking interface
+│   │   ├── RoomCard.tsx      # Room display card
+│   │   ├── SearchBar.tsx     # Search functionality
+│   │   ├── FilterSection.tsx # Tag filters
+│   │   ├── DateFilter.tsx    # Date selection
+│   │   └── SpacesAvailable.tsx # Room grid display
+│   └── lib/                   # Utilities and types
+│       ├── types.ts          # TypeScript interfaces
+│       └── constants.ts      # API endpoints & config
+│
+├── server/                    # Django backend
+│   ├── rooms/                # Rooms app
+│   │   ├── models.py         # Room & TagItem models
+│   │   ├── views.py          # ViewSets for API
+│   │   ├── serializer.py     # DRF serializers
+│   │   └── urls.py           # Room routes
+│   ├── bookings/             # Bookings app
+│   │   ├── models.py         # Booking model
+│   │   ├── views.py          # Booking ViewSet
+│   │   ├── serializers.py    # Booking serializers
+│   │   └── urls.py           # Booking routes
+│   ├── server/               # Project settings
+│   │   ├── settings.py       # Django configuration
+│   │   └── urls.py           # Root URL config
+│   ├── rooms-images/         # Uploaded room images
+│   └── manage.py             # Django CLI
+│
+└── testimages/               # Sample room images
 ```
 
 ## Prerequisites
 
-- **Node.js**: 20.x or higher
-- **Bun**: Latest version (or npm/yarn as alternative)
-- **Python**: 3.14 or higher
-- **Poetry**: Latest version
+- **Node.js** 20.x or higher
+- **Bun** (or npm/yarn/pnpm)
+- **Python** 3.13 or higher
+- **Poetry** 1.8+
 
 ## Getting Started
 
-### Backend Setup
+### 1. Backend Setup
 
-1. Navigate to the server directory:
-   ```bash
-   cd server
-   ```
+Navigate to the server directory and set up the Django backend:
 
-2. Install dependencies using Poetry:
-   ```bash
-   poetry install
-   ```
+```bash
+cd server
 
-3. Activate the virtual environment:
-   ```bash
-   poetry shell
-   ```
+# Install dependencies
+poetry install
 
-4. Run migrations:
-   ```bash
-   python manage.py migrate
-   ```
+# Activate virtual environment
+poetry shell
 
-5. Start the development server:
-   ```bash
-   python manage.py runserver
-   ```
+# Run database migrations
+python manage.py migrate
 
-The backend API will be available at `http://localhost:8000`
+# (Optional) Create a superuser for admin access
+python manage.py createsuperuser
 
-### Frontend Setup
+# Start the development server
+python manage.py runserver
+```
 
-1. Navigate to the client directory:
-   ```bash
-   cd client
-   ```
+The API will be available at `http://localhost:8000`
 
-2. Install dependencies:
-   ```bash
-   bun install
-   ```
+**Available API Endpoints:**
+- `GET /rooms/` - List all rooms
+- `POST /rooms/` - Create a new room
+- `GET /rooms/{id}/` - Get room details
+- `GET /tags/` - List all tags
+- `GET /bookings/` - List all bookings
+- `POST /bookings/` - Create a booking
 
-3. Start the development server:
-   ```bash
-   bun dev
-   ```
+### 2. Frontend Setup
 
-The frontend application will be available at `http://localhost:3000`
+In a new terminal, navigate to the client directory:
 
-## Development
+```bash
+cd client
 
-### Frontend Development
+# Install dependencies
+bun install
 
-- **Development**: `bun dev` - Start the Next.js development server
-- **Build**: `bun build` - Create a production build
-- **Start**: `bun start` - Start the production server
-- **Lint**: `bun lint` - Run ESLint
+# Start the development server
+bun dev
+```
 
-### Backend Development
+The application will be available at `http://localhost:3000`
 
-- Run the Django development server with auto-reload enabled
-- Access the Django admin panel (after creating a superuser) at `http://localhost:8000/admin`
-- API endpoints will be available at `http://localhost:8000/api/`
+### 3. (Optional) Seed Data
+
+To populate the database with sample rooms and images, you can use the Django admin interface at `http://localhost:8000/admin` or create fixtures.
+
+## API Integration
+
+The frontend communicates with the backend through the configured API base URL (`http://localhost:8000` by default). This can be customized via the `NEXT_PUBLIC_API_URL` environment variable in the client.
+
+Key API integration points:
+- Room fetching: `client/app/page.tsx:25-38`
+- API constants: `client/lib/constants.ts:1-6`
 
 ## Features
 
-- Browse available coworking spaces
-- Book desks, meeting rooms, and private offices
-- Manage bookings and reservations
-- Admin User authentication and profiles
-- Real-time availability updates
+### Implemented
+- Browse available coworking spaces with image display
+- Real-time search functionality
+- Filter rooms by tags (High-Speed WiFi, Meeting Rooms, Quiet Zones, etc.)
+- Date filtering for availability
 - Responsive design for mobile and desktop
+- Room details with tags and descriptions
+- Booking modal interface
+
+### Data Models
+
+**Room** - Represents a bookable space
+- Name, description, image
+- Associated tags (many-to-many via TagItem)
+- Timestamps
+
+**TagItem** - Feature tags for rooms
+- Tag name (e.g., "High-Speed Wifi", "Pet Friendly")
+- Foreign key to Room
+
+**Booking** - Reservation records
+- Room reference, visitor info (name, email)
+- Start/end datetime
+- Status (Pending, Approved, Cancelled)
+- Optional cancellation reason
+
+## Development
+
+### Frontend Commands
+
+```bash
+bun dev          # Start dev server (http://localhost:3000)
+bun build        # Create production build
+bun start        # Start production server
+bun lint         # Run ESLint
+```
+
+### Backend Commands
+
+```bash
+python manage.py runserver        # Start dev server
+python manage.py makemigrations   # Create new migrations
+python manage.py migrate          # Apply migrations
+python manage.py createsuperuser  # Create admin user
+python manage.py shell            # Django shell
+```
+
+### Admin Panel
+
+Access the Django admin at `http://localhost:8000/admin` to manage:
+- Rooms and their properties
+- Tags and categorization
+- Bookings and their status
+
+## Configuration
+
+### Environment Variables (Frontend)
+
+Create a `.env.local` file in the `client/` directory:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+### CORS Configuration
+
+The backend is configured to accept requests from `http://localhost:3000` by default. To modify this, edit `server/server/settings.py:106-108`.
+
+## Media Files
+
+Room images are stored in `server/rooms-images/`. The backend serves these files in development mode via Django's static file handling.
+
+## Database
+
+The project uses SQLite by default (`server/db.sqlite3`). For production, consider migrating to PostgreSQL or another robust database system.
+
+## License
+
+This project is for educational and testing purposes.
 
 
