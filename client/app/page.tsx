@@ -24,18 +24,21 @@ export default function Home() {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const response = await fetch(
+                const res = await fetch(
                     `${API_BASE_URL}${API_ENDPOINTS.rooms}`,
                 );
-                const data = await response.json();
+                if(!res.ok) {
+                    throw new Error("Could not get rooms")
+                }
+                const data = await res.json();
                 setRooms(data);
             } catch (error) {
                 console.error("Error fetching rooms:", error);
             }
         };
-
         fetchRooms();
     }, []);
+
     return (
         <div className="bg-slate-100 min-h-screen">
             <Header />
