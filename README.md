@@ -127,7 +127,42 @@ The application will be available at `http://localhost:3000`
 
 ### 3. (Optional) Seed Data
 
-To populate the database with sample rooms and images, you can use the Django admin interface at `http://localhost:8000/admin` or create fixtures.
+#### Quick Reset & Populate with Scripts
+
+The server directory includes utility scripts for quickly resetting and populating the database:
+
+**Reset Database (`nuke.sh`)**
+
+```bash
+cd server
+./nuke.sh
+```
+
+This script will:
+- Delete the SQLite database
+- Remove all migration files
+- Create fresh migrations for rooms and bookings apps
+- Run migrations
+- Create a superuser (username: `admin`, password: `admin`)
+
+**Populate Test Data (`test-upload.sh`)**
+
+After running `nuke.sh`, start the server and populate it with sample rooms:
+
+```bash
+# In terminal 1: Start the server
+poetry run python manage.py runserver
+
+# In terminal 2: Upload test data
+cd server
+./test-upload.sh
+```
+
+This will create 9 sample rooms with images and random tags. Requires the server to be running and uses the admin credentials created by `nuke.sh`.
+
+**Alternative: Manual Data Entry**
+
+You can also populate the database using the Django admin interface at `http://localhost:8000/admin`.
 
 ## API Integration
 
