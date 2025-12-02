@@ -5,6 +5,11 @@ from .models import Rooms, RoomType, TagItem
 class RoomsModelTest(TestCase):
     # Create a test room
     def setUp(self):
+        """
+        Create a Rooms instance and assign it to self.room for use in tests.
+        
+        The room is created with name "Test Room", an excerpt, description, good_for set to "meetings", and capacity 10 and stored on the test case instance as `self.room`.
+        """
         self.room = Rooms.objects.create(
             name="Test Room",
             excerpt="A test room excerpt",
