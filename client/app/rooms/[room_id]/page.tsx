@@ -2,6 +2,7 @@ import { API_BASE_URL, API_ENDPOINTS } from "@/lib/constants";
 import { Room } from "@/lib/types";
 import Image from "next/image";
 import TagsList from "@/components/TagsList";
+import { LocateIcon } from "lucide-react";
 
 const RoomPage = async ({
     params,
@@ -82,6 +83,18 @@ const RoomPage = async ({
                         </div>
                     </div>
                     <TagsList tags={room.tags} />
+
+                    { /* Section for the location services to go */ }
+
+                    <div className="space-y-3 px-2 mt-10">
+                        <h3 className="font-bold text-lg mr-4">
+                            Location: 
+                        </h3>
+                            <div className="bg-slate-200 text-slate-500 rounded-lg py-20 items-center justify-center flex gap-2">
+                            <LocateIcon />
+                                <p>Location Currently Unavailable</p>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
