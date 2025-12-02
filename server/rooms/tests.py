@@ -23,7 +23,7 @@ class RoomsModelTest(TestCase):
 
     def test_room_type_relationship(self):
         """Test one-to-one relationship with RoomType"""
-        room_type = RoomType.objects.create(
+        RoomType.objects.create(
             type="Conference",
             room=self.room
         )
