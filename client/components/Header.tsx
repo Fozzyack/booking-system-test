@@ -4,9 +4,9 @@ import { Menu, X, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const navItems = [
-    { label: "Features", href: "#features" },
-    { label: "Mentors", href: "#mentors" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Features", href: "/features" },
+    { label: "How It Works", href: "/how-it-works" },
+    { label: "About", href: "/about" },
 ];
 
 export const Header: React.FC = () => {
