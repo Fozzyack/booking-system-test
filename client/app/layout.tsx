@@ -22,7 +22,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${montserrat.variable} antialiased`}>
                 <Header />
-                <div className="px-4 md:px-32 lg:px-64 py-10">{children}</div>
+                <div className="px-4 md:px-22 lg:px-64 py-10">{children}</div>
             </body>
         </html>
     );

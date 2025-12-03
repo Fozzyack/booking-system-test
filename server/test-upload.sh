@@ -105,31 +105,59 @@ http --session=admin --ignore-stdin POST :8000/room-types/ type="Creative Studio
 http --session=admin --ignore-stdin POST :8000/room-types/ type="Focus Room" room:=9
 
 # Define available tags
-TAGS=("High-Speed Wifi" "Meeting Rooms" "Quiet Zones" "Pet Friendly" "Dual Monitors" "Whiteboard")
+TAGS=("High-Speed Wifi" "Meeting Rooms" "Quiet Zones" "Pet Friendly" "Dual Monitors" "Whiteboard" "Projector" "Video Conference" "Natural Light" "Ergonomic Seating")
 
-echo "Adding random tags to rooms..."
+echo "Adding fixed tags to rooms..."
 
-# Function to add random tags to a room
-add_random_tags() {
-  local room_id=$1
-  local num_tags=$((RANDOM % 4 + 1))  # 1-4 tags
-  
-  for ((i=0; i<num_tags; i++)); do
-    local random_tag="${TAGS[RANDOM % ${#TAGS[@]}]}"
-    http --session=admin --ignore-stdin POST :8000/tags/ tag="$random_tag" room:=$room_id
-  done
-}
+# Add specific tags to each room based on their characteristics
+# Room 1: IMac Central - Conference room with tech focus
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=1
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Projector" room:=1
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Video Conference" room:=1
 
-# Add random tags to each room
-add_random_tags 1
-add_random_tags 2  
-add_random_tags 3
-add_random_tags 4
-add_random_tags 5
-add_random_tags 6
-add_random_tags 7
-add_random_tags 8
-add_random_tags 9
+# Room 2: Under Rottnest - Small collaboration space
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=2
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Whiteboard" room:=2
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Natural Light" room:=2
+
+# Room 3: The Cove - Executive board room
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=3
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Video Conference" room:=3
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Ergonomic Seating" room:=3
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Projector" room:=3
+
+# Room 4: Training Room D - Training facility
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=4
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Whiteboard" room:=4
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Projector" room:=4
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Dual Monitors" room:=4
+
+# Room 5: Standard Hall E - Large lecture hall
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=5
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Projector" room:=5
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Video Conference" room:=5
+
+# Room 6: The Milky Way - Creative collaboration space
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=6
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Whiteboard" room:=6
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Natural Light" room:=6
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Ergonomic Seating" room:=6
+
+# Room 7: Video Conference G - Dedicated video conferencing
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=7
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Video Conference" room:=7
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Dual Monitors" room:=7
+
+# Room 8: Warm Studio H - Creative studio
+http --session=admin --ignore-stdin POST :8000/tags/ tag="High-Speed Wifi" room:=8
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Natural Light" room:=8
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Whiteboard" room:=8
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Ergonomic Seating" room:=8
+
+# Room 9: Large Dog Park I - Focus room
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Quiet Zones" room:=9
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Ergonomic Seating" room:=9
+http --session=admin --ignore-stdin POST :8000/tags/ tag="Natural Light" room:=9
 
 echo "Updating room capacities..."
 http --session=admin PATCH :8000/rooms/1/ capacity:=20

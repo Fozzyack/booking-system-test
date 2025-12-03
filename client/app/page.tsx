@@ -53,7 +53,7 @@ export default function Home() {
                         Access premium workspaces, studios and event halls
                         across our areas. Instant booking, no contracts.
                     </p>
-                    <div className="flex gap-4 items-center justify-between">
+                    <div className="flex flex-col md:flex-row gap-4 justify-between">
                         <SearchBar value={search} onChange={setSearch} />
                         <DateFilter date={date} setDate={setDate} />
                     </div>
