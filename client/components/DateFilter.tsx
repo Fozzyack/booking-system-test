@@ -3,24 +3,16 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide-react";
 import { DateFilterProps } from "@/lib/types";
-import { MONTHS } from "@/lib/constants"; 
+import { MONTHS } from "@/lib/constants";
+import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/date-utils";
 
 const DateFilter: React.FC<DateFilterProps> = ({ date, setDate }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
-
     const handleClear = () => {
         setDate(undefined);
-        setIsModalOpen(false)
-    }
-
-    const getDaysInMonth = (date: Date) => {
-        return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-    };
-
-    const getFirstDayOfMonth = (date: Date) => {
-        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        setIsModalOpen(false);
     };
 
     const handleDateSelect = (day: number) => {
