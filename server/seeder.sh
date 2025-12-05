@@ -3,6 +3,7 @@
 rm -rf ./db.sqlite3
 rm -rf ./bookings/migrations/
 rm -rf ./rooms/migrations/
+rm -rf ./rooms-images/*.jpg
 
 poetry run python manage.py makemigrations bookings
 poetry run python manage.py makemigrations rooms 
