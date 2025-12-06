@@ -64,7 +64,7 @@ const BookingDateFilter = () => {
     };
 
     return (
-        <div className="sticky left-0 top-30 space-y-12">
+        <div className="space-y-12">
             <div className="p-8 rounded-xl bg-white inline-block shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all ease-in-out duration-150">
                 {/* Might have to change w-xs in the future*/}
                 <div className="flex items-center justify-between gap-4 min-w-[300px]">
