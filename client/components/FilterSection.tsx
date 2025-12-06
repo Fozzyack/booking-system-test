@@ -1,9 +1,12 @@
 "use client";
-import { AVAILABLE_TAGS } from "@/lib/constants";
 import { Filter, Check } from "lucide-react";
 import { FilterSectionProps } from "@/lib/types";
 
-const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle }) => {
+const FilterSection: React.FC<FilterSectionProps> = ({
+    tags,
+    selectedTags,
+    onTagToggle,
+}) => {
     const handleFilterSelect = (
         e: React.MouseEvent<HTMLButtonElement>,
         filter: string,
@@ -11,7 +14,8 @@ const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle
         e.preventDefault();
         onTagToggle(filter);
     };
-    
+
+
     return (
         <div className="flex items-center gap-4 py-4 flex-wrap">
             <div className="flex items-center justify-center">
@@ -19,7 +23,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle
                 <p className="">Filter By:</p>
             </div>
             <div className="flex gap-2 flex-wrap">
-                {AVAILABLE_TAGS.map((filter, index) => {
+                {tags.map((filter, index) => {
                     const isSelected = selectedTags.includes(filter);
                     return (
                         <button
@@ -31,7 +35,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle
                                 ${isSelected ? "bg-primary text-primary-foreground" : "bg-slate-200 text-primary"}
                                 `}
                         >
-                            <Check 
+                            <Check
                                 className={`transition-all duration-300 ease-in-out ${isSelected ? "w-4 h-4 opacity-100" : "w-0 h-0 opacity-0"}`}
                             />
                             {filter}
