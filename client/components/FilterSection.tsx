@@ -15,7 +15,6 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         onTagToggle(filter);
     };
 
-    console.log("TAGS: ", tags);
 
     return (
         <div className="flex items-center gap-4 py-4 flex-wrap">
