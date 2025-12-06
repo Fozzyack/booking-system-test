@@ -2,8 +2,10 @@
 import { AVAILABLE_TAGS } from "@/lib/constants";
 import { Filter, Check } from "lucide-react";
 import { FilterSectionProps } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle }) => {
+    const [tags, setTags] = useState<string[]>([]);
     const handleFilterSelect = (
         e: React.MouseEvent<HTMLButtonElement>,
         filter: string,
@@ -11,6 +13,15 @@ const FilterSection: React.FC<FilterSectionProps> = ({ selectedTags, onTagToggle
         e.preventDefault();
         onTagToggle(filter);
     };
+    
+    useEffect(() => {
+        fetch("http://localhost:8000/tags", {
+            method: "GET"
+        })
+        .then( res => res.json())
+        .then( data => setTags(data))
+    }, [])
+    console.log(tags);
     
     return (
         <div className="flex items-center gap-4 py-4 flex-wrap">
