@@ -106,9 +106,9 @@ const RoomPage = async ({
                     </div>
                 </div>
                 <div className="flex items-center justify-center mt-10 md:mt-0 md:block md:col-span-5 lg:col-span-4">
-                    <div className="space-y-8 sticky left-0 top-30 ">
+                    <div className="px-4 md:p-0 space-y-8 sticky left-0 top-30 ">
                         <BookingDateFilter />
-                        <BookingTimeComponent />
+                        <BookingTimeComponent startTime_24hour={8} endTime_24hour={19}/>
                     </div>
                 </div>
             </div>
