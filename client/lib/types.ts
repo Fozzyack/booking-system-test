@@ -60,6 +60,7 @@ export interface BookingModalProps {
 
 export interface FilterSectionProps {
     selectedTags: string[];
+    tags: string[];
     onTagToggle: (tag: string) => void;
 }
 

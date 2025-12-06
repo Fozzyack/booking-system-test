@@ -23,7 +23,6 @@ const RoomPage = async ({
         tags: [],
     };
     const { room_id } = await params;
-    console.log(`${API_BASE_URL}${API_ENDPOINTS.rooms}${room_id}`);
     try {
         const res = await fetch(
             `${API_BASE_URL}${API_ENDPOINTS.rooms}${room_id}`,
@@ -40,7 +39,6 @@ const RoomPage = async ({
         console.log(error);
         console.log("Network Error");
     }
-    console.log(room);
     const imageUrl = room.image
         ? room.image.startsWith("http")
             ? room.image

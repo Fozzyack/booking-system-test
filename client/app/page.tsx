@@ -14,6 +14,7 @@ export default function Home() {
     const [filters, setFilters] = useState<string[]>([]);
     const [rooms, setRooms] = useState<Room[]>([]);
     const [date, setDate] = useState<Date | undefined>(undefined);
+    const [tags, setTags] = useState<string[]>([]);
 
     const handleTagToggle = (tag: string) => {
         setFilters((prev) =>
@@ -36,10 +37,26 @@ export default function Home() {
                 console.error("Error fetching rooms:", error);
             }
         };
+        const fetchTags = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}${API_ENDPOINTS.tags}`);
+                if (!res.ok) {
+                    throw new Error("Could not get tags");
+                }
+                const data = await res.json();
+                const tag_list: string[] = [];
+                for (let i = 0; i < data.length; i++) {
+                    if (!tag_list.includes(data[i].tag))
+                        tag_list.push(data[i].tag);
+                }
+                setTags(tag_list);
+            } catch (error) {
+                console.error("Error fetching tags:", error);
+            }
+        };
         fetchRooms();
+        fetchTags();
     }, []);
-
-    console.log(rooms);
 
     return (
         <div className="min-h-screen">
@@ -60,6 +77,7 @@ export default function Home() {
                     <FilterSection
                         selectedTags={filters}
                         onTagToggle={handleTagToggle}
+                        tags={tags}
                     />
                     <SpacesAvailable
                         rooms={rooms}
