@@ -1,5 +1,4 @@
 "use client";
-import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import FilterSection from "@/components/FilterSection";
 import SpacesAvailable from "@/components/SpacesAvailable";
