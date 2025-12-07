@@ -1,5 +1,8 @@
 from datetime import datetime
 from typing import Any
+
+from django.db import transaction
+
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -58,30 +61,31 @@ class RoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         data = request.data
 
-        # Validate that data is a list of availability entries
         if not isinstance(data, list):
             return Response(
                 {"error": "Expected a list of availability entries"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Clear existing availability for this room
-        RoomAvailability.objects.filter(room=room).delete()
-
-        # Create new availability entries
-        created_entries = []
+        serializers = []
         for entry in data:
             entry["room"] = room.id
-            serializer = RoomAvailabilitySerializer(data=entry)
-            if serializer.is_valid():
-                serializer.save()
-                created_entries.append(serializer.data)
-            else:
-                return Response(
-                    serializer.errors, status=status.HTTP_400_BAD_REQUEST
-                )
+            room_serializer = RoomAvailabilitySerializer(data=entry)
+            if not room_serializer.is_valid():
+                return Response(room_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            serializers.append(room_serializer)
 
-        return Response(created_entries, status=status.HTTP_201_CREATED)
+
+        with transaction.atomic():
+            RoomAvailability.objects.filter(room=room).delete()
+            entries = [s.save() for s in serializers]
+
+        return Response(
+            [RoomAvailabilitySerializer(e).data for e in entries],
+            status=status.HTTP_201_CREATED
+        )
+
+
 
 
 class TagViewSet(viewsets.ModelViewSet):
