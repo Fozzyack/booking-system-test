@@ -28,6 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = 'user_auth.CustomUser'
+ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rooms',
     'bookings',
+    'user_auth',
 ]
 
 MIDDLEWARE = [
