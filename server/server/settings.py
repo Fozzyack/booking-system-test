@@ -28,11 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-AUTH_USER_MODEL = 'user_auth.CustomUser'
-ACCOUNT_EMAIL_VERIFICATION = None
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
+# User Auth Model (Custom)
 
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 # Application definition
 

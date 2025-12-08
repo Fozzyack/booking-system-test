@@ -8,6 +8,7 @@ Just added some sample serializers for now.
 Might add or remove later
 """
 
+
 class CustomUserSerializer(serializers.ModelSerializer):
     """Serializer for viewing user details"""
 
@@ -94,9 +95,19 @@ class ChangePasswordSerializer(serializers.Serializer):  # type: ignore[misc]
     new_password_confirm = serializers.CharField(required=True, write_only=True)
 
     def validate(self, attrs):
-        """Validate that new passwords match"""
+        """Validate that old password is correct and new passwords match"""
+        user = self.context["request"].user
+
+        # Check if old password is correct
+        if not user.check_password(attrs["old_password"]):
+            raise serializers.ValidationError(
+                {"old_password": "Old password is incorrect."}
+            )
+
+        # Check if new passwords match
         if attrs["new_password"] != attrs["new_password_confirm"]:
             raise serializers.ValidationError(
                 {"new_password": "Password fields didn't match."}
             )
+
         return attrs
