@@ -30,7 +30,7 @@ const LoginPage = () => {
             <form className="grid grid-cols-12 h-screen">
                 <div className="hidden md:block relative md:col-span-7 lg:col-span-8">
                     <Image
-                        src="/assets/images/login_image_resize_2.png"
+                        src="/assets/images/login_image_resize.png"
                         alt="The Space Space"
                         fill
                         className="object-cover rounded-r-[2em]"
