@@ -5,13 +5,12 @@
 //
 
 import { MONTHS } from "@/lib/constants";
+import { BookingDateFilterProps } from "@/lib/types";
 import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/date-utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
 
-const BookingDateFilter = () => {
-    const [currentDate, setCurrentDate] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+const BookingDateFilter: React.FC<BookingDateFilterProps> = ({currentDate, setCurrentDate, selectedDate, setSelectedDate}) => {
 
     const handlePreviousMonth = () => {
         setCurrentDate(
@@ -41,20 +40,20 @@ const BookingDateFilter = () => {
         for (let day = 1; day <= daysInMonth; day++) {
             const isSelected =
                 selectedDate &&
-                selectedDate.getDate() == day &&
-                selectedDate.getMonth() == currentDate.getMonth() &&
-                selectedDate.getFullYear() == currentDate.getFullYear();
+                selectedDate.getDate() === day &&
+                selectedDate.getMonth() === currentDate.getMonth() &&
+                selectedDate.getFullYear() === currentDate.getFullYear();
 
             const isToday =
-                new Date().getDate() == day &&
-                new Date().getMonth() == currentDate.getMonth() &&
-                new Date().getFullYear() == currentDate.getFullYear();
+                new Date().getDate() === day &&
+                new Date().getMonth() === currentDate.getMonth() &&
+                new Date().getFullYear() === currentDate.getFullYear();
 
             days.push(
                 <button
                     key={`day-button-${day}`}
                     onClick={() => handleSelectDate(day)}
-                    className={`p-2 border rounded-lg ${isToday ? "border-primary" : "border-white"} ${isSelected ? "bg-primary text-primary-foreground hover:bg-primary/80" : "hover:bg-slate-100"} transition-all duration-150 `}
+                    className={`p-1 border rounded-lg ${isToday ? "border-primary" : "border-white"} ${isSelected ? "bg-primary text-primary-foreground hover:bg-primary/80" : "hover:bg-slate-100"} transition-all duration-150 `}
                 >
                     {day}
                 </button>,
@@ -64,7 +63,7 @@ const BookingDateFilter = () => {
     };
 
     return (
-        <div className="sticky left-0 top-30 space-y-12">
+        <div className="space-y-12">
             <div className="p-8 rounded-xl bg-white inline-block shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all ease-in-out duration-150">
                 {/* Might have to change w-xs in the future*/}
                 <div className="flex items-center justify-between gap-4 min-w-[300px]">

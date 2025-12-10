@@ -80,3 +80,17 @@ export interface SpacesAvailableProps {
     rooms: Room[];
     searchTerm: string;
 }
+
+export interface BookingDateFilterProps {
+    currentDate: Date
+    setCurrentDate: (value: Date) => void;
+    selectedDate: Date | null;
+    setSelectedDate: (value: Date | null) => void;
+}
+
+export interface BookingTimeComponentType {
+    startTime_24hour: number;
+    endTime_24hour: number;
+    selectedTime: string;
+    setSelectedTime: (value: string) => void;
+}
