@@ -39,7 +39,7 @@ const BookingTimeComponent: React.FC<BookingTimeComponentType> = ({
         <div className="w-full bg-white rounded-xl border-slate-200 shadow-xl p-8 space-y-4">
             <h5 className="text-lg font-bold">Select a Time</h5>
             <div className="grid grid-cols-4 gap-1">{timeConstruction()}</div>
-            <button className="flex-1 w-full px-4 py-2 border border-primary rounded-lg hover:bg-gray-50 hover:-translate-y-1 transition-all ease-in-out">
+            <button onClick={() => setSelectedTime("")} className="flex-1 w-full px-4 py-2 border border-primary rounded-lg hover:bg-gray-50 hover:-translate-y-1 transition-all ease-in-out">
                 Clear
             </button>
         </div>
