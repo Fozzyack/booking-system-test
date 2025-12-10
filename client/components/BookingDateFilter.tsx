@@ -7,11 +7,15 @@
 import { MONTHS } from "@/lib/constants";
 import { getDaysInMonth, getFirstDayOfMonth } from "@/utils/date-utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
 
-const BookingDateFilter = () => {
-    const [currentDate, setCurrentDate] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+interface BookingDateFilterProps {
+    currentDate: Date
+    setCurrentDate: (value: Date) => void;
+    selectedDate: Date | null;
+    setSelectedDate: (value: Date | null) => void;
+}
+
+const BookingDateFilter: React.FC<BookingDateFilterProps> = ({currentDate, setCurrentDate, selectedDate, setSelectedDate}) => {
 
     const handlePreviousMonth = () => {
         setCurrentDate(
