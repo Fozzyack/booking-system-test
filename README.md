@@ -15,24 +15,52 @@ A modern, full-stack booking system for coworking spaces, built with Next.js and
 - **Advanced Filtering**: Filter rooms by tags (High-Speed WiFi, Meeting Rooms, Quiet Zones, etc.)
 - **Date-Based Availability**: Filter rooms by date (backend endpoint ready for integration)
 - **Room Details**: Detailed room pages with capacity, type, description, and amenities
+- **Booking Interface**: Time slot selection and date picker components on room detail pages
 - **Responsive Design**: Mobile-friendly interface with Tailwind CSS
 - **Image Management**: Upload and display room images
 - **REST API**: Full CRUD operations for rooms and bookings
-- **Admin Login UI**: Login page with authentication UI components
+- **User Authentication UI**: Login and sign-up pages with form validation
+- **Find My Booking**: Search for existing bookings by email
 - **About & Info Pages**: About, Features, and How It Works pages
 - **Custom Date Picker**: Custom-built booking date filter component
+- **Time Selection**: Interactive time slot selection for bookings (30-minute intervals)
 
 ### In Progress
-- Booking flow completion
+- Backend integration for booking submission
 - Date-based availability filtering (frontend-backend integration)
 - Location services integration
-- User authentication integration
+- User authentication backend integration
 
 ## Overview
 
 This application provides a streamlined interface for browsing and booking coworking spaces. Users can search and filter through available rooms, view detailed information with tags (like High-Speed WiFi, Meeting Rooms, Quiet Zones), and make reservations. The system features a responsive React/Next.js frontend communicating with a Django REST API backend.
 
-The application includes informational pages (About, Features, How It Works), an admin login interface, and custom date picker components for booking functionality.
+The application includes informational pages (About, Features, How It Works), user authentication interfaces (login and sign-up), a find-my-booking search page, and interactive booking components with date and time selection for making reservations.
+
+### Recent Updates
+
+**Booking Interface Enhancements**
+- Implemented complete booking UI on room detail pages with date and time selection
+- Added BookingSection component that combines date picker and time slot selection
+- Time slots available in 30-minute intervals with configurable hours
+- Sticky positioning for booking section on room detail pages
+
+**New Pages Added**
+- `/sign-up` - User registration with password matching validation
+- `/find-my-booking` - Email-based booking search interface
+
+**Component Improvements**
+- Renamed Header component to Navbar for better clarity
+- Refactored booking components for better state management
+- Added TypeScript interfaces for all booking-related props
+- Improved mobile responsiveness across all pages
+- Enhanced date filter with availability display on main search page
+
+**UI/UX Enhancements**
+- Better visual feedback for selected dates and times
+- Improved form validation on authentication pages
+- Enhanced transitions and hover effects throughout the app
+- Sticky navbar with scroll-based styling
 
 ## Tech Stack
 
@@ -60,13 +88,17 @@ booking-system-test/
 ├── client/                       # Next.js frontend
 │   ├── app/                      # App router pages
 │   │   ├── (admin)/              # Admin route group
-│   │   │   └── login/
-│   │   │       └── page.tsx      # Admin login page
+│   │   │   ├── login/
+│   │   │   │   └── page.tsx      # Admin login page
+│   │   │   └── sign-up/
+│   │   │       └── page.tsx      # Admin sign-up page
 │   │   ├── (booking)/            # Booking route group with shared layout
 │   │   │   ├── about/
 │   │   │   │   └── page.tsx      # About page
 │   │   │   ├── features/
 │   │   │   │   └── page.tsx      # Features page
+│   │   │   ├── find-my-booking/
+│   │   │   │   └── page.tsx      # Find booking page
 │   │   │   ├── how-it-works/
 │   │   │   │   └── page.tsx      # How it works page
 │   │   │   ├── rooms/
@@ -79,11 +111,13 @@ booking-system-test/
 │   │   ├── favicon.ico           # Site favicon
 │   │   └── not-found.tsx         # 404 page
 │   ├── components/               # React components
-│   │   ├── BookingDateFilter.tsx # Custom booking date picker
+│   │   ├── BookingDateFilter.tsx # Custom booking calendar picker
+│   │   ├── BookingSection.tsx    # Booking section container (date + time)
+│   │   ├── BookingTimeCard.tsx   # Time slot selection component
 │   │   ├── CallToAction.tsx      # CTA component
-│   │   ├── DateFilter.tsx        # Date selection component
+│   │   ├── DateFilter.tsx        # Date availability filter
 │   │   ├── FilterSection.tsx     # Tag filter UI
-│   │   ├── Header.tsx            # Site header
+│   │   ├── Navbar.tsx            # Site navigation bar
 │   │   ├── RoomCard.tsx          # Room display card with booking link
 │   │   ├── SearchBar.tsx         # Real-time search
 │   │   ├── SpacesAvailable.tsx   # Room grid with filtering logic
@@ -211,11 +245,13 @@ The application will be available at `http://localhost:3000`
 
 **Available Pages:**
 - `/` - Main search and browse page with room filtering
-- `/rooms/[id]` - Individual room detail page
+- `/rooms/[id]` - Individual room detail page with booking interface
 - `/about` - About Bloom page with mission, values, and team info
 - `/features` - Features page (to be implemented)
 - `/how-it-works` - How it works page (to be implemented)
-- `/login` - Admin login page
+- `/find-my-booking` - Search for existing bookings by email
+- `/login` - User login page with authentication UI
+- `/sign-up` - User registration page with password validation
 
 ### 3. (Optional) Seed Data
 
@@ -265,28 +301,82 @@ You can also populate the database using the Django admin interface at `http://l
 The frontend communicates with the backend through the configured API base URL (`http://localhost:8000` by default). This can be customized via the `NEXT_PUBLIC_API_URL` environment variable in the client.
 
 Key API integration points:
-- Room fetching on homepage: `client/app/(booking)/page.tsx:25-40`
+- Room fetching on homepage: `client/app/(booking)/page.tsx`
 - Room detail fetching: `client/app/(booking)/rooms/[room_id]/page.tsx`
+- Booking search: `client/app/(booking)/find-my-booking/page.tsx`
 - API constants: `client/lib/constants.ts`
-- TypeScript types: `client/lib/types.ts`
+- TypeScript types and interfaces: `client/lib/types.ts`
 
 ### CORS Configuration
 
 The backend is configured to accept requests from `http://localhost:3000` by default (`server/server/settings.py`). Additional origins can be added to the `CORS_ALLOWED_ORIGINS` list in the settings file.
+
+## Key Components
+
+### Booking Components
+The application features a comprehensive booking interface with the following components:
+
+**BookingSection** (`client/components/BookingSection.tsx`)
+- Container component that manages booking state (date and time selection)
+- Renders both BookingDateFilter and BookingTimeCard
+- Uses sticky positioning on room detail pages for persistent visibility
+
+**BookingDateFilter** (`client/components/BookingDateFilter.tsx`)
+- Interactive calendar component for date selection
+- Month navigation with previous/next controls
+- Highlights current date and selected date
+- Displays all days of the month in a grid layout
+
+**BookingTimeCard** (`client/components/BookingTimeCard.tsx`)
+- Time slot selection in 30-minute intervals
+- Configurable start and end times (default 8:00 AM - 7:00 PM)
+- Visual feedback for selected time slot
+- Clear button to reset selection
+
+**DateFilter** (`client/components/DateFilter.tsx`)
+- Date availability filter on the main search page
+- Modal-based date picker with overlay
+- Integrated with room filtering system
+
+**Navbar** (`client/components/Navbar.tsx`)
+- Responsive navigation with mobile menu
+- Sticky header with scroll-based styling
+- Links to main pages and authentication
+- "Find My Booking" quick access
+
+### Search & Filter Components
+
+**SearchBar** (`client/components/SearchBar.tsx`)
+- Real-time search input with clear functionality
+- Searches room names and descriptions
+
+**FilterSection** (`client/components/FilterSection.tsx`)
+- Tag-based filtering with toggleable chips
+- Supports multiple tag selection
+
+**SpacesAvailable** (`client/components/SpacesAvailable.tsx`)
+- Grid display of filtered rooms
+- Combines search term and tag filtering
+- Responsive card layout
 
 ## Architecture
 
 ### Frontend Architecture
 - **Next.js 16** with App Router for file-based routing
 - **Route Groups** for organizing pages:
-  - `(booking)` - Main booking flow pages with shared layout (home, rooms, about, features, how-it-works)
-  - `(admin)` - Admin pages (login)
+  - `(booking)` - Main booking flow pages with shared layout and navbar (home, rooms, about, features, how-it-works, find-my-booking)
+  - `(admin)` - User authentication pages (login, sign-up)
 - **Server Components** for initial data fetching on room detail pages
-- **Client Components** for interactive features (search, filtering, date pickers)
-- **TypeScript** for type safety across the application
+- **Client Components** for interactive features (search, filtering, date/time pickers, forms)
+- **TypeScript** for type safety across the application with comprehensive interface definitions
 - **Tailwind CSS** for responsive utility-first styling with custom theme colors (bloom-orbit, bloom-blue)
 - **Lucide React** for consistent iconography
-- **Custom Components** including two date picker implementations (DateFilter and BookingDateFilter)
+- **Custom Components** including:
+  - **BookingDateFilter** - Interactive calendar for selecting booking dates
+  - **BookingTimeCard** - Time slot selection in 30-minute intervals
+  - **BookingSection** - Combined date and time selection interface
+  - **DateFilter** - Date availability filter for the main search page
+  - **Navbar** - Responsive navigation with mobile menu
 
 ### Backend Architecture
 - **Django REST Framework** ViewSets for RESTful API endpoints
@@ -432,12 +522,13 @@ cd server
 ## Known Issues & Future Improvements
 
 ### Frontend
-- Date filter UI components exist (`DateFilter.tsx` and `BookingDateFilter.tsx`) but not yet integrated with backend availability endpoint
-- Booking flow needs completion (currently links to room detail page)
+- Booking submission needs backend integration (UI complete with date and time selection)
+- Find My Booking search needs backend endpoint integration
+- Date filter components need integration with backend availability endpoint
 - Location services placeholder on room detail pages
-- Admin login UI exists but needs backend authentication integration
+- User authentication (login/sign-up) needs backend API integration
 - Image optimization could be improved
-- Features and How It Works pages need implementation
+- Features and How It Works pages need content implementation
 
 ### Backend
 - Date-based availability endpoint (`/rooms/free-on/`) implemented but needs booking conflict logic
@@ -446,16 +537,17 @@ cd server
 - SECRET_KEY should be moved to environment variables for production
 
 ### Potential Enhancements
-- Complete user authentication and profiles integration
-- Advanced booking management (edit, cancel with reasons)
-- Email notifications for bookings
-- Room availability calendar view
-- Payment integration
+- Complete user authentication backend and session management
+- Booking confirmation emails and notifications
+- Advanced booking management (edit, view history, cancel with reasons)
+- Room availability calendar view with real-time updates
+- Payment integration for booking deposits
 - Reviews and ratings system
-- Admin dashboard improvements
+- Admin dashboard for managing rooms and bookings
+- User profiles and preferences
 - Unit and integration tests
-- Real-time availability updates
-- Booking conflict prevention logic
+- Booking conflict prevention and validation logic
+- Multi-language support
 
 ## Contributing
 
